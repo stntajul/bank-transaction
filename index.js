@@ -25,25 +25,18 @@ depositBtn.addEventListener('click',function(){
 
 })
 const withdrawBtn=document.getElementById('withdraw-btn');
-withdrawBtn.addEventListener('click',function(event){
-    const withdrawAmount=document.getElementById('withdrawAmountInput').value;
-    const availableBalance=parseFloat(document.getElementById('currentBalance').innerText);
-    let prevWidtdrawBalance=parseFloat(document.getElementById('widthdraw-amount').innerText);
-    //console.log(availableBalance);
-    //console.log(withdrawAmount);
-    let totalWithdrawAmount=document.getElementById('widthdraw-amount').innerText;
-  
-    document.getElementById('currentBalance').innerText=availableBalance-withdrawAmount;
-    
-    document.getElementById('widthdraw-amount').innerHTML=withdrawAmount+prevWidtdrawBalance;
-
-    console.log(totalWithdrawAmount);
-    document.getElementById('withdrawAmountInput').value='';
-    
-    
-
-   
+withdrawBtn.addEventListener('click',function(){
+    const withdrawNumber=getInputNumber('withdrawAmountInput');
+    updateSpanText("currentWithdraw",withdrawNumber);
+    updateSpanText("currentBalance",-1*withdrawNumber);
+    document.getElementById("withdrawAmountInput").value='';
 })
+function getInputNumber(id){
+    const amnt=document.getElementById(id).value;
+    const nmbr=parseFloat(amnt);
+    return nmbr;
+
+}
 function updateSpanText(id,totalAmount){
  
   const current=document.getElementById(id).innerText;
